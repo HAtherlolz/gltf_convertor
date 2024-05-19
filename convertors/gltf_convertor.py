@@ -42,7 +42,7 @@ class GLTFConvertor:
 
         return self.tmp_path
 
-    def extract_model_and_textures(self) -> Tuple[str, str, List[str]]:
+    def _extract_model_and_textures(self) -> Tuple[str, str, List[str]]:
         """
             Gets the model file and textures from temp dir
         """
@@ -84,7 +84,7 @@ class GLTFConvertor:
         """
         bpy.ops.wm.read_factory_settings(use_empty=True)  # Creates new scene
 
-        file_name, file_path, textures = self.extract_model_and_textures()
+        file_name, file_path, textures = self._extract_model_and_textures()
 
         if file_path.split(".")[1] == "fbx":
             bpy.ops.import_scene.fbx(filepath=file_path)  # Import FBX
