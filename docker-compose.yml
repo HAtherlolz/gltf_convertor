@@ -5,15 +5,5 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-#    volumes:
-#      - ./scripts:/usr/src/app/scripts
     entrypoint: ["tail", "-f", "/dev/null"]
 
-#  webapp:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile.webapp
-#    ports:
-#      - "8000:8000"
-#    depends_on:
-#      - blender

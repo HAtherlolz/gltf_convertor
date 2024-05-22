@@ -2,7 +2,6 @@
 import os
 import shutil
 import zipfile
-import argparse
 
 from typing import Tuple, List, NoReturn
 
