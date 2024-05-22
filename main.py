@@ -2,6 +2,7 @@
 import os
 import shutil
 import zipfile
+import argparse
 
 from typing import Tuple, List, NoReturn
 
@@ -105,16 +106,26 @@ class GLTFConvertor:
 
 
 if __name__ == "__main__":
-    zip_file_path = "data/supersushi.zip"
-    extracted_dir = "/tmp/supersushi_extracted_zip"
-    output_file_path = "output_zip"
+    archive_path = os.getenv('ARCHIVE_PATH')
+    tmp_path = os.getenv('TMP_PATH')
+    output_path = os.getenv('OUTPUT_PATH')
+
+    # zip_file_path = "data/supersushi.zip"
+    # extracted_dir = "/tmp/supersushi_extracted_zip"
+    # output_file_path = "output_zip"
+    zip_file_path = archive_path
+    extracted_dir = tmp_path
+    output_file_path = output_path
+    print("zip_file_path: ", zip_file_path)
+    print("extracted_dir: ", extracted_dir)
+    print("output_file_path: ", output_file_path)
     convertor_zip = GLTFConvertor(zip_file_path, extracted_dir, output_file_path)
     convertor_zip.convert_to_gltf()
 
-    rar_file_path = "data/SushiCart.rar"
-    extracted_dir = "/tmp/supersushi_extracted_rar"
-    output_file_path = "output_rar"
-    convertor_rar = GLTFConvertor(rar_file_path, extracted_dir, output_file_path)
-    convertor_rar.convert_to_gltf()
+    # rar_file_path = "data/SushiCart.rar"
+    # extracted_dir = "/tmp/supersushi_extracted_rar"
+    # output_file_path = "output_rar"
+    # convertor_rar = GLTFConvertor(rar_file_path, extracted_dir, output_file_path)
+    # convertor_rar.convert_to_gltf()
 
     print("Conversion completed successfully!")
