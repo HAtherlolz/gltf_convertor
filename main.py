@@ -11,6 +11,11 @@ import rarfile
 
 
 class GLTFConvertor:
+    model_importers = {
+        "fbx": bpy.ops.import_scene.fbx,
+        "obj": bpy.ops.import_scene.obj,
+        "stl": bpy.ops.import_mesh.stl
+    }
 
     def __init__(
             self,
@@ -103,12 +108,10 @@ class GLTFConvertor:
         bpy.ops.wm.read_factory_settings(use_empty=True)  # Creates new scene
 
         file_name, file_path, textures = self._extract_model_and_textures()
+        models_file_extension = file_path.split(".")[1]
 
-        if file_path.split(".")[1] == "fbx":
-            bpy.ops.import_scene.fbx(filepath=file_path)  # Import FBX
-        elif file_path.split(".")[1] == "obj":
-            bpy.ops.import_scene.obj(filepath=file_path)  # Import OBJ
-
+        # Gets a right model importer and imports the scene
+        self.model_importers[models_file_extension](filepath=file_path)
         self._output_dir_get_or_create()
         output = f"{self.output_path}/{file_name}"
 
