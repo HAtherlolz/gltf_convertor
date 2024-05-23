@@ -11,10 +11,20 @@ import rarfile
 
 
 class GLTFConvertor:
-    def __init__(self, archive_path: str, tmp_path: str, output_path):
+
+    def __init__(
+            self,
+            archive_path: str,
+            tmp_path: str,
+            output_path: str,
+            model_file_extensions: Tuple = (".obj", ".fbx", ".stl"),
+            textures_file_extensions: Tuple = (".png", ".jpg", ".bmp", ".tga", ".tif")
+    ):
         self.archive_path = archive_path
         self.tmp_path = tmp_path
         self.output_path = output_path
+        self.model_file_extensions = model_file_extensions
+        self.textures_file_extensions = textures_file_extensions
 
     def _tmp_dir_get_or_create(self) -> NoReturn:
         """ Ensure the extraction directory exists """
@@ -46,19 +56,17 @@ class GLTFConvertor:
         """
             Gets the model file and textures from temp dir
         """
-        tmp_dir = self._extract()
         file_path = None
         file_name = None
         textures = list()
+        tmp_dir = self._extract()
+
         for root, dirs, files in os.walk(tmp_dir):
             for file in files:
-                if file.endswith(".fbx"):
+                if file.endswith(self.model_file_extensions):
                     file_path = os.path.join(root, file)
                     file_name = file
-                elif file.endswith(".obj"):
-                    file_path = os.path.join(root, file)
-                    file_name = file
-                elif file.endswith('.png') or file.endswith('.jpg'):
+                elif file.endswith(self.textures_file_extensions):
                     textures.append(os.path.join(root, file))
             if file_path:
                 break
@@ -102,3 +110,4 @@ class GLTFConvertor:
 
         # Remove tmp dir
         shutil.rmtree(self.tmp_path)
+
