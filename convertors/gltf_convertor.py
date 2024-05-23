@@ -20,6 +20,16 @@ class GLTFConvertor:
             model_file_extensions: Tuple = (".obj", ".fbx", ".stl"),
             textures_file_extensions: Tuple = (".png", ".jpg", ".bmp", ".tga", ".tif")
     ):
+        """
+        - Required args:
+        :param archive_path:                - path to archive
+        :param tmp_path:                    - path for temporary directory (creates and deletes after converting)
+        :param output_path:                 - path for converted .gltf model and textures
+
+        - Non required args:
+        :param model_file_extensions:       - tuple of allowed extensions for models file
+        :param textures_file_extensions:    - tuple of allowed extensions for textures file
+        """
         self.archive_path = archive_path
         self.tmp_path = tmp_path
         self.output_path = output_path
