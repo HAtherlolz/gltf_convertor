@@ -134,7 +134,7 @@ if __name__ == "__main__":
     print("tmp_path: ", tmp_path)
     print("output_path: ", output_path)
 
-    convertor_zip = GLTFConvertor(archive_path, tmp_path, output_path)
-    convertor_zip.convert_to_gltf()
+    convertor = GLTFConvertor(archive_path, tmp_path, output_path)
+    convertor.convert_to_gltf()
 
     print("Conversion completed successfully!")
